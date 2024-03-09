@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Domain;
 
 namespace Persistence
@@ -104,10 +100,11 @@ namespace Persistence
                     City = "London",
                     Venue = "Cinema",
                 }
-            };
-
+            };           
+            
             await context.Activities.AddRangeAsync(activities);
             await context.SaveChangesAsync();
         }
+        
     }
 }
