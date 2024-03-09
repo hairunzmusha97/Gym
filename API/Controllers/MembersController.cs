@@ -1,28 +1,28 @@
+using Application.Members;
 using Domain;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 namespace API.Controllers
 {
     public class MembersController : BaseApiController
     {
-        private readonly DataContext _context;
-        public MembersController(DataContext context)
+        private readonly IMediator _mediator;
+        public MembersController(IMediator mediator)
         {
-            _context = context;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Member>>> GetMembers()
         {
-            return await _context.Members.ToListAsync();
+            return await _mediator.Send(new List.Query());
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Member>> GetMember(Guid id)
         {
-            return await _context.Members.FindAsync(id);
+            return Ok();
         }
     }
 }
